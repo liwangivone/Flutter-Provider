@@ -1,3 +1,7 @@
+// File: lib/global_state_package.dart
+
+library global_state_package;
+
 class GlobalState {
   // List untuk menyimpan nilai dari setiap counter
   final List<int> counters = [];

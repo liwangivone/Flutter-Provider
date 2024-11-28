@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'global_state.dart'; // Import file global_state.dart
-
+import 'package:global_state_package/global_state.dart';
+ 
 void main() {
   runApp(const GlobalStateApp());
 }
@@ -10,11 +10,11 @@ class GlobalStateApp extends StatefulWidget {
   const GlobalStateApp({super.key});
 
   @override
-  _GlobalStateAppState createState() => _GlobalStateAppState();
+  GlobalStateAppState createState() => GlobalStateAppState();
 }
 
 // State untuk aplikasi dengan GlobalState
-class _GlobalStateAppState extends State<GlobalStateApp> {
+class GlobalStateAppState extends State<GlobalStateApp> {
   // Inisialisasi GlobalState
   final GlobalState globalState = GlobalState();
 

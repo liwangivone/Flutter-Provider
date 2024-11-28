@@ -1,14 +1,25 @@
-// File: lib/global_state_package.dart
-
 library global_state_package;
 
-class GlobalState {
-  // List untuk menyimpan nilai dari setiap counter
-  final List<int> counters = [];
+import 'dart:math';
+import 'package:flutter/material.dart';
 
-  // Fungsi untuk menambah counter baru
+class CounterItem {
+  int value; // Nilai counter
+  Color color; // Warna counter
+
+  CounterItem({required this.value, required this.color});
+}
+
+class GlobalState {
+  // List untuk menyimpan data counter (nilai dan warna)
+  final List<CounterItem> counters = [];
+
+  // Fungsi untuk menambah counter baru dengan warna random
   void addCounter() {
-    counters.add(0); // Nilai awal counter baru adalah 0
+    counters.add(CounterItem(
+      value: 0,
+      color: _generateRandomColor(),
+    ));
   }
 
   // Fungsi untuk menghapus counter berdasarkan indeks
@@ -21,14 +32,39 @@ class GlobalState {
   // Fungsi untuk menambah (increment) nilai counter berdasarkan indeks
   void incrementCounter(int index) {
     if (index >= 0 && index < counters.length) {
-      counters[index]++;
+      counters[index].value++;
     }
   }
 
   // Fungsi untuk mengurangi (decrement) nilai counter berdasarkan indeks
   void decrementCounter(int index) {
-    if (index >= 0 && index < counters.length && counters[index] > 0) {
-      counters[index]--;
+    if (index >= 0 && index < counters.length && counters[index].value > 0) {
+      counters[index].value--;
     }
+  }
+
+  // Fungsi untuk mengganti warna counter berdasarkan indeks
+  void changeCounterColor(int index, Color newColor) {
+    if (index >= 0 && index < counters.length) {
+      counters[index].color = newColor;
+    }
+  }
+
+  // Fungsi untuk memindahkan posisi counter dalam list
+  void reorderCounters(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) newIndex -= 1;
+    final item = counters.removeAt(oldIndex);
+    counters.insert(newIndex, item);
+  }
+
+  // Helper untuk menghasilkan warna random
+  Color _generateRandomColor() {
+    final Random random = Random();
+    return Color.fromARGB(
+      255,
+      random.nextInt(256),
+      random.nextInt(256),
+      random.nextInt(256),
+    );
   }
 }

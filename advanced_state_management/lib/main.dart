@@ -69,11 +69,13 @@ class GlobalStateAppState extends State<GlobalStateApp> {
                                 });
                               },
                             ),
-                            // Tombol untuk mengganti warna counter
+                            // Tombol untuk mengganti warna counter secara random
                             IconButton(
-                              icon: const Icon(Icons.color_lens, color: Colors.white),
+                              icon: const Icon(Icons.colorize, color: Colors.white),
                               onPressed: () {
-                                _pickColorForCounter(index);
+                                setState(() {
+                                  globalState.randomizeCounterColor(index);
+                                });
                               },
                             ),
                           ],
@@ -113,32 +115,4 @@ class GlobalStateAppState extends State<GlobalStateApp> {
       ),
     );
   }
-
-  // Dialog untuk memilih warna baru counter
-  Future<void> _pickColorForCounter(int index) async {
-    final Color? selectedColor = await showDialog<Color>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Pick a color'),
-          content: SingleChildScrollView(
-            child: blockPicker(
-              pickerColor: globalState.counters[index].color,
-              onColorChanged: (Color color) {
-                Navigator.of(context).pop(color);
-              },
-            ),
-          ),
-        );
-      },
-    );
-
-    if (selectedColor != null) {
-      setState(() {
-        globalState.changeCounterColor(index, selectedColor);
-      });
-    }
-  }
-  
-  blockPicker({required Color pickerColor, required Null Function(Color color) onColorChanged}) {}
 }

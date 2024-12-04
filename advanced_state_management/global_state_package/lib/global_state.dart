@@ -43,10 +43,10 @@ class GlobalState {
     }
   }
 
-  // Fungsi untuk mengganti warna counter berdasarkan indeks
-  void changeCounterColor(int index, Color newColor) {
+  // Fungsi untuk mengganti warna counter secara random
+  void randomizeCounterColor(int index) {
     if (index >= 0 && index < counters.length) {
-      counters[index].color = newColor;
+      counters[index].color = _generateRandomColor();
     }
   }
 
